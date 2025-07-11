@@ -40,9 +40,7 @@ This project details the setup of a fundamental Security Operations Center (SOC)
 
 
 <h2>Project Walkthrough</h2>
-<p>
 <h3> Step 1: Virtual Machine Setup </h3>
-
 1. Download VirtualBox and its associated hash file. Verify the integrity of the downloaded VirtualBox installer by comparing its SHA256 hash with the one provided on the official VirtualBox website. This confirms that the file was not corrupted during transit. <br>
 <img src="https://i.imgur.com/C0JCgwB.png" alt="Disk Sanitization Steps"/>
 <br>
@@ -56,5 +54,65 @@ This project details the setup of a fundamental Security Operations Center (SOC)
 <br>
 <img src="https://i.imgur.com/617njbE.png" alt="Basic Home SOC Lab Steps"/>
 <br />
-
-</p>
+4. Download a pre-built Kali Linux virtual machine image from the official Kali Linux website, specifically designed for VirtualBox. Set up the Kali Linux VM in VirtualBox. Configure its settings, including assigning 2048 MB of base memory and 4 processors.
+<br>
+<img src="https://i.imgur.com/nRpMGec.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+<img src="https://i.imgur.com/sJV0QRq.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+5. To ensure a completely isolated environment, create an internal network named 'mytest' in the network adapter settings for both the Kali Linux and Windows 10 VMs. This isolates the lab from the host machine and external networks.
+<br>
+<img src="https://i.imgur.com/sVbKyvJ.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+6. Take snapshots of both VMs' states. This provides a backup to revert to a known working state if any configuration errors occur.
+<br>
+<img src="https://i.imgur.com/XxKSAAS.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+<h3> Step 2: Network Configuration</h3>
+1. Within the Windows 10 VM, navigate to the network adapter settings, locate the IPv4 configuration, and assign a static IP address to the virtual network adapter.
+<br>
+<img src="https://i.imgur.com/wWsmInc.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+<img src="https://i.imgur.com/CFUoWpO.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+<img src="https://i.imgur.com/d8L2Ys7.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+2. Configure the Kali Linux VM with a static IP address. This is done by editing the wired connection settings and manually setting the IP address, netmask, and gateway. <i>Temporarily change the adapter setting to NAT for internet connectivity to download Sysmon and Splunk on the Windows VM, then revert to the internal network. </i>
+<br>
+<img src="https://i.imgur.com/8Oee3q9.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+<img src="https://i.imgur.com/OTGxo18.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+<h3> Step 3: Defensive Tool Deployment (Windows 10 VM)</h3>
+<br>
+1. Access the main webpage for Sysmon on the Windows VM and then navigate to its GitHub page to download the Sysmon configuration repository's raw data. 
+<br>
+<img src="https://i.imgur.com/d8bskfs.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+<img src="https://i.imgur.com/m7ouL8r.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+<img src="https://i.imgur.com/K9RjhyV.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+2. Extract the downloaded Sysmon files within the Windows VM.
+<br>
+<img src="https://i.imgur.com/eYRprN7.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+3. Open PowerShell as administrator, navigate to the directory where Sysmon was extracted, and use the command to install Sysmon onto the system with the desired configuration.
+<br>
+<img src="https://i.imgur.com/1WcNCCU.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+<img src="https://i.imgur.com/fLCFNsO.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+4. Confirm Sysmon's successful installation by checking the list of running services on the Windows VM.
+<br>
+<img src="https://i.imgur.com/b3E5X4O.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+5. Download Splunk Enterprise and proceed with its installation on the Windows VM. After the installation, log into the Splunk web interface via a browser within the Windows VM.
+<br>
+<img src="https://i.imgur.com/l4kRr6M.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+<h3> Step 4: Offensive Simulation (Kali Linux VM & Windows 10 VM)</h3>
+1. From the Kali Linux machine, use Nmap (e.g., nmap -A [Windows_VM_IP_Address] -Pn) to scan the Windows 10 VM and identify open ports and services.
+<br>
+<img src="" alt="Basic Home SOC Lab Steps"/>
+<br>
