@@ -177,8 +177,20 @@ Construct the malware using a command similar to <i>msfvenom -p windows/x64/mete
 <br>
 <img src="https://i.imgur.com/61Giuk7.png" alt="Basic Home SOC Lab Steps"/>
 <br>
-
 </p>
+
+<h2>Key Learning/Reflections</h2>
+This project offered significant insights into building a practical cybersecurity lab and performing basic threat detection. Key learnings include:
 <br>
-<img src="" alt="Basic Home SOC Lab Steps"/>
+- <b>Lab Environment Setup:</b> Gained hands-on experience in configuring a realistic, sandboxed environment for cybersecurity practice using virtualization. This included managing network settings and ensuring inter-VM communication.
 <br>
+- <b>Log Management And SIEM Integration:</b> Developed a deeper understanding of how Sysmon collects granular system telemetry and how Splunk ingests, indexes, and enables analysis of these logs. This reinforced the importance of comprehensive logging for visibility into system activities.
+<br>
+- <b>Threat Simulation and Analysis:</b> Successfully simulated an attack chain, from reconnaissance (Nmap) to payload generation (msfvenom) and exploitation (Metasploit). Analyzing the generated logs in Splunk provided practical experience in identifying attack artifacts and understanding attacker behavior from a defender's perspective.
+<br>
+- <b>Challenges and Troubleshooting:</b> Encountered and resolved issues related to payload creation and sysmon integration with Splunk for correct log ingestion. This highlighted the iterative nature of lab setup and the importance of systematic troubleshooting.
+<br>
+- <b>Defensive Capabilities:</b> Reinforced the value of a SIEM in correlating disparate log sources to detect anomalies and malicious activities that might otherwise go unnoticed.
+<br>
+<h2>Conclusion</h2>
+This project successfully established a functional home SOC lab, effectively demonstrating the end-to-end process of setting up a secure environment, collecting and aggregating logs, and performing basic threat detection through simulated attacks. The hands-on experience gained in configuring VirtualBox, deploying Sysmon and Splunk, and analyzing security events directly enhances practical skills relevant to security operations, incident response, and threat intelligence. This foundational lab provides a scalable base for further exploration into advanced threat detection techniques and security tool integration.
