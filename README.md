@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://i.imgur.com/yGtOeVI.jpeg" alt="Basic Home SOC Lab Steps"/>
+<img src="https://i.imgur.com/phn1iYT.gif" alt="Basic Home SOC Lab Steps"/>
 </p>
 
 <br>
